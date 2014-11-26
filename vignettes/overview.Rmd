@@ -15,6 +15,13 @@ I was inclined to build the `GP.Bagging` package, as I am constantly running thi
 ### Important Notes
 The `GP.Bagging` package is a **work in progress**, hence the version is `0.0.0.9000`. Some features are not yet available, and will be noted in the following vignette.
 
+### Installation
+To install this package from my Github repository, simply input the following:
+```{r, eval=FALSE}
+library(devtools)
+install_github("Dustin21/GP.Bagging")
+```
+
 
 ### Dependencies
 `GP.Bagging` is dependent on the following packages:
