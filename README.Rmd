@@ -1,6 +1,12 @@
-# Bagging for Gaussian Process Regression
-Dustin Johnson  
-`r Sys.Date()`  
+---
+title: "Bagging for Gaussian Process Regression"
+author: "Dustin Johnson"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    keep_md: true
+  
+---
 
 I was inclined to build the `GP.Bagging` package, as I am constantly running this bagging routine for a current research project in STAT 547L - Dynamic Computer Experiments. The project is still underway, and so is my code. I will be updating a more sound version in the coming weeks. To my knowledge, bagging for GPs is quite new and there is no package available on CRAN thus far.
 
@@ -9,8 +15,7 @@ The `GP.Bagging` package is a **work in progress**, hence the version is `0.0.0.
 
 ### Installation
 To install this package from my Github repository, simply input the following:
-
-```r
+```{r, eval=FALSE}
 library(devtools)
 install_github("Dustin21/GP.Bagging")
 ```
@@ -57,44 +62,13 @@ package is a wrapper to a companion function called GPfit.
 ### Using the function GP_Bag()
 To use `GP_Bag()`, you must first load the package:
 
-
-```r
+```{r}
 library(GP.Bagging)
-```
-
-```
-## Loading required package: ggplot2
-## Loading required package: GPfit
-## Loading required package: lhs
-## Loading required package: foreach
-## Loading required package: reshape2
-## Loading required package: plyr
-## Loading required package: dplyr
-## 
-## Attaching package: 'dplyr'
-## 
-## The following objects are masked from 'package:plyr':
-## 
-##     arrange, count, desc, failwith, id, mutate, rename, summarise,
-##     summarize
-## 
-## The following object is masked from 'package:stats':
-## 
-##     filter
-## 
-## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union
-## 
-## Loading required package: RCurl
-## Loading required package: bitops
-## Loading required package: assertthat
 ```
 
 You then input your training data.frame into the function as `dat.train`, and your test set, denoted as `x.test` and `y.test`. You can even specify the number of iterations to loop your bagging algorithm. `n` specifies the length of your training set. `...` can be any argument incorporated from the `GPfit` package.
 
-
-```r
+```{r, eval=FALSE}
 GP_Bag(dat.train, x.test, y.test, iterations = 10,
   n = dim(dat.train)[1], ...)
 ```
@@ -104,8 +78,7 @@ GP_Bag(dat.train, x.test, y.test, iterations = 10,
 
 Plotting the Gaussian process regressions are easy! All you have to do is input a `GP_Bag()` object and the input values of your test set.
 
-
-```r
+```{r, eval=FALSE}
 p <- plot_Bag(mod, x.test)
 print(p)
 ```
@@ -113,8 +86,7 @@ print(p)
 ### Using the function Error.GP_Bag()
 We can even check the error of our model simply by calling our `GP_Bag()` object and the observational vector of our test set. This saves you all the work from doing it yourself.
 
-
-```r
+```{r, eval=FALSE}
 error <- Error.GP_Bag(mod, x.test)
 print(error)
 ```
@@ -123,8 +95,7 @@ print(error)
 ### A 1-d Toy Example
 Let's combine all our functions into a toy example. First we will output our `GP_Bag()` object.
 
-
-```r
+```{r}
 ### Toy Example in 2-dimensional case.
 # Training set
 set.seed(2)
@@ -144,61 +115,18 @@ GP.mod <- GP_Bag(dat.train, x.test, y.test, iterations = 20, n = 15)
 print(GP.mod)
 ```
 
-```
-## $pred
-## Source: local data frame [101 x 2]
-## 
-##    var        obs
-## 1   V1  0.7845320
-## 2   V2  0.2860105
-## 3   V3 -0.4787780
-## 4   V4 -1.3067734
-## 5   V5 -1.8929946
-## 6   V6 -1.9566616
-## 7   V7 -1.3959405
-## 8   V8 -0.3785725
-## 9   V9  0.7153633
-## 10 V10  1.4921714
-## .. ...        ...
-## 
-## $sd
-##   [1] 5.649013 5.647611 5.646162 5.646708 5.648607 5.648135 5.643319
-##   [8] 5.638321 5.637855 5.639757 5.640070 5.639463 5.639490 5.640023
-##  [15] 5.641100 5.642085 5.641681 5.640765 5.641258 5.642975 5.644294
-##  [22] 5.643727 5.643141 5.647581 5.655128 5.657124 5.651597 5.644742
-##  [29] 5.642336 5.644366 5.646248 5.645813 5.644744 5.643829 5.644641
-##  [36] 5.650525 5.658848 5.662777 5.661666 5.660334 5.663290 5.668121
-##  [43] 5.666638 5.658872 5.651606 5.646407 5.642093 5.639175 5.638220
-##  [50] 5.639713 5.643542 5.647730 5.650355 5.651340 5.651683 5.653456
-##  [57] 5.659161 5.668102 5.674709 5.673103 5.663459 5.651856 5.643866
-##  [64] 5.640676 5.640987 5.643690 5.648030 5.653452 5.660676 5.670573
-##  [71] 5.680516 5.684968 5.681285 5.672106 5.662153 5.655258 5.654470
-##  [78] 5.662659 5.672684 5.671456 5.668933 5.677652 5.684434 5.687523
-##  [85] 5.699659 5.724751 5.757351 5.776443 5.765110 5.732336 5.696829
-##  [92] 5.669393 5.654270 5.651972 5.657906 5.664570 5.669636 5.682734
-##  [99] 5.717051 5.766335 5.800519
-```
-
 Now let's examine the plot by simply calling our `GP_Bag()`, `GP.mod` and test set, `y.test`.
 
-
-```r
+```{r}
 p <- plot_Bag(GP.mod, x.test)
 print(p)
 ```
 
-![](./README_files/figure-html/unnamed-chunk-7-1.png) 
-
 Finally, let's examine the error by again calling on our `GP_Bag()` object, as well as our test observations, `y.test`.
 
-
-```r
+```{r}
 error <- Error.GP_Bag(GP.mod, y.test)
 print(error)
-```
-
-```
-## [1]   1.500329 114.366076
 ```
 
 
