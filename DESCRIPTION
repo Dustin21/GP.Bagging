@@ -1,0 +1,31 @@
+Package: GP.Bagging
+Title: Perform Bootstrap Aggregation (Bagging) for Gaussian Process Regression.
+Version: 0.0.0.9000
+Authors@R: "Dustin Johnson <dustin.bwj@gmail.com> [aut, cre]"
+Description: Gaussian Process (GP) Regression gained hype in the late 1990's
+    for pattern recognition due to the rapid advancement of computational power
+    that helped facilitate the implementation of GPs for large data sets.
+    Deriving from the family of neural networks and Bayesian non-parametric
+    regression, GPs are noted to be quite sensitive to changes in the training
+    data causing stability issues. Performing bagging on GPs increases
+    prediction stability and accuracy in data that follows a noisy and
+    stochastic behaviour (non-deterministic). To my knowledge, there is no
+    package to facilitate a bagging procedure on Gaussian Processes. This
+    package is a wrapper to a companion function called GPfit.
+Depends:
+    R (>= 3.1.2),
+    ggplot2,
+    GPfit,
+    lhs,
+    foreach,
+    reshape2,
+    plyr,
+    dplyr,
+    RCurl,
+    assertthat
+License: CC0
+LazyData: true
+Suggests:
+    knitr,
+    testthat
+VignetteBuilder: knitr
