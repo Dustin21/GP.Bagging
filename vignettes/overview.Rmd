@@ -27,6 +27,7 @@ install_github("Dustin21/GP.Bagging")
 `GP.Bagging` is dependent on the following packages:
 
 * **GPfit**: Fits Gaussian Process models.
+* **lhs**: Used for the function `maximinLHS()` to create a latin hypercube design (LHD) for the experiment.
 * **foreach**: Enables efficient loops and parallel computation (parallel not yet integrated).
 * **reshape2**: Use `melt()` function to reform data into long-form. 
 * **plyr**: Used for its `ldply()` convert list to data.frame.
@@ -86,7 +87,7 @@ print(p)
 ```
 
 ### Using the function Error.GP_Bag()
-We can even check the error of our model simply by calling our `GP_Bag()` object and the observational vector of our test set. This saves you all the work from doing it yourself.
+We can even check the root mean squared error (RMSE) and absolute error (AbsE) of our model simply by calling our `GP_Bag()` object and the observational vector of our test set. This saves you all the work from doing it yourself.
 
 ```{r, eval=FALSE}
 error <- Error.GP_Bag(mod, x.test)
@@ -124,7 +125,7 @@ p <- plot_Bag(GP.mod, x.test)
 print(p)
 ```
 
-Finally, let's examine the error by again calling on our `GP_Bag()` object, as well as our test observations, `y.test`.
+Finally, let's examine the RMSE and AbsE by again calling on our `GP_Bag()` object, as well as our test observations, `y.test`.
 
 ```{r}
 error <- Error.GP_Bag(GP.mod, y.test)

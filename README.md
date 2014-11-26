@@ -20,6 +20,7 @@ install_github("Dustin21/GP.Bagging")
 `GP.Bagging` is dependent on the following packages:
 
 * **GPfit**: Fits Gaussian Process models.
+* **lhs**: Used for the function `maximinLHS()` to create a latin hypercube design (LHD) for the experiment.
 * **foreach**: Enables efficient loops and parallel computation (parallel not yet integrated).
 * **reshape2**: Use `melt()` function to reform data into long-form. 
 * **plyr**: Used for its `ldply()` convert list to data.frame.
@@ -111,7 +112,7 @@ print(p)
 ```
 
 ### Using the function Error.GP_Bag()
-We can even check the error of our model simply by calling our `GP_Bag()` object and the observational vector of our test set. This saves you all the work from doing it yourself.
+We can even check the root mean squared error (RMSE) and absolute error (AbsE) of our model simply by calling our `GP_Bag()` object and the observational vector of our test set. This saves you all the work from doing it yourself.
 
 
 ```r
@@ -140,7 +141,7 @@ y.test <- matrix(0, length(x.test), 1)
 for(i in 1:length(x.test)){ y.test[i] = (20*x.test[i])*sin(20*x.test[i]) }
 dat.test <- data.frame(cbind(x.test,y.test))
 
-GP.mod <- GP_Bag(dat.train, x.test, y.test, iterations = 20, n = 15)
+GP.mod <- GP_Bag(dat.train, x.test, y.test, iterations = 20)
 print(GP.mod)
 ```
 
@@ -189,7 +190,7 @@ print(p)
 
 ![](./README_files/figure-html/unnamed-chunk-7-1.png) 
 
-Finally, let's examine the error by again calling on our `GP_Bag()` object, as well as our test observations, `y.test`.
+Finally, let's examine the RMSE and AbsE by again calling on our `GP_Bag()` object, as well as our test observations, `y.test`.
 
 
 ```r
