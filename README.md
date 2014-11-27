@@ -12,7 +12,7 @@ To install this package from my Github repository, simply input the following:
 
 ```r
 library(devtools)
-install_github("Dustin21/GP.Bagging")
+install_github("Dustin21/GP.Bagging", build_vignettes = TRUE)
 ```
 
 

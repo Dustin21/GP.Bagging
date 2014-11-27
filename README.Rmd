@@ -17,7 +17,7 @@ The `GP.Bagging` package is a **work in progress**, hence the version is `0.0.0.
 To install this package from my Github repository, simply input the following:
 ```{r, eval=FALSE}
 library(devtools)
-install_github("Dustin21/GP.Bagging")
+install_github("Dustin21/GP.Bagging", build_vignettes = TRUE)
 ```
 
 
